@@ -1,0 +1,138 @@
+* {
+    padding: 0;
+    margin: 0;
+    
+}
+
+html,
+body {
+    height: 100%;
+    width: 100%;
+    overflow: hidden;
+}
+
+#magazine {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    overflow: hidden;
+    
+}
+
+#pages {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    z-index: 1;
+    /* overflow-y: scroll; */
+}
+
+#pages div.page {
+    background: #fff;
+    /* background-image: url(清新时光.jpg); */
+    font-size:16px;
+    background-size:100% 100%;
+    overflow-y: auto;
+    text-indent:25px;
+}
+#pages div.turn-page {
+    background: #fff;
+    /* background-image: url(清新时光.jpg); */
+    font-size:16px;
+    background-size:100% 100%;
+    overflow-y: auto;
+    text-indent:25px;
+    
+}
+#content {
+    height: 0;
+    overflow: hidden;
+    width: 100%;
+
+}
+
+#contentText {
+    width: 100%;
+}
+
+/* 这里是内容的样式,修改时候,一起修改 */
+div.turn-page, #contentText {
+    white-space: pre-wrap;
+    box-sizing: border-box;
+    padding: 0 10px;
+    
+    font-family: "Microsoft YaHei";
+}
+/* 这里是内容的样式,修改时候,一起修改 */
+div.page, #contentText {
+    white-space: pre-wrap;
+    box-sizing: border-box;
+    padding: 0 10px;
+    
+}
+
+#alert {
+    position: absolute;
+    bottom: 40px;
+    left: 50%;
+    text-align: center;
+    transform: translateX(-50%);
+    background: rgba(0,0,0,0.6);
+    border-radius: 4px;
+    color: #fff;
+    z-index: 10;
+    font-size: 12px;
+    padding: 6px 10px;
+    display: none;
+    font-family: Microsoft YaHei;
+    align-items:center;
+    justify-content:center;
+}
+
+/* 侧边栏 */
+.sidebar-wrapper {
+    position: relative;
+    height: 100%;
+    /* overflow: auto; */
+    overflow-x: hidden;
+    overflow-y: auto;
+    list-style-type: none;
+}
+
+#pages div.page::-webkit-scrollbar,#pages div.turn-page::-webkit-scrollbar{
+    /*滚动条整体样式*/
+    width : 10px;  /*高宽分别对应横竖滚动条的尺寸*/
+    height: 1px;
+}
+#pages div.page::-webkit-scrollbar-thumb,#pages div.turn-page::-webkit-scrollbar-thumb{
+    /*滚动条里面小方块*/
+    border-radius   : 10px;
+    background-color: skyblue;
+    background-image: -webkit-linear-gradient(
+        45deg,
+        rgba(255, 255, 255, 0.2) 25%,
+        transparent 25%,
+        transparent 50%,
+        rgba(255, 255, 255, 0.2) 50%,
+        rgba(255, 255, 255, 0.2) 75%,
+        transparent 75%,
+        transparent
+    );
+}
+#pages div.page::-webkit-scrollbar-track,#pages div.turn-page::-webkit-scrollbar-track{
+    /*滚动条里面轨道*/
+    box-shadow   : inset 0 0 5px rgba(0, 0, 0, 0.2);
+    background   : #ededed;
+    border-radius: 10px;
+}
+
+
+/* 正文标题css */
+.page_title{
+    width: 100%;
+    height: 6vh;
+    display: block;
+}
+.page_title p{
+    height: 100%;
+}

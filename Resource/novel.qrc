@@ -1,0 +1,43 @@
+<RCC>
+  <qresource prefix="icon">
+    <file>icon/Icon_f_add_click.png</file>
+    <file>icon/Icon_f_reduce_click.png</file>
+    <file>icon/Icon_f_add.png</file>
+    <file>icon/Icon_f_reduce.png</file>
+    <file>icon/refresh128.png</file>
+    <file>icon/manage48.png</file>
+    <file>icon/checkbox_checked.png</file>
+    <file>icon/checkbox_unchecked.png</file>
+    <file>icon/nsearchStop48.png</file>
+    <file>icon/searchStop48.png</file>
+    <file>icon/backtorule128.png</file>
+    <file>icon/delete.png</file>
+    <file>icon/delete_w.png</file>
+    <file>icon/d_128.png</file>
+    <file>icon/d_128_h.png</file>
+    <file>icon/xpath48.png</file>
+    <file>icon/moreOperation48.png</file>
+    <file>icon/playSound48.png</file>
+    <file>icon/search48.png</file>
+    <file>icon/rule48.png</file>
+    <file>icon/download48.png</file>
+    <file>icon/setting48.png</file>
+    <file>icon/home48.png</file>
+    <file>icon/search2.png</file>
+    <file>icon/refresh.gif</file>
+    <file>icon/refresh2.gif</file>
+    <file>icon/search.png</file>
+    <file>icon/refresh.gif</file>
+  </qresource>
+  <qresource prefix="png">
+    <file>noneSearch.png</file>
+    <file>noCover.jpeg</file>
+  </qresource>
+  <qresource prefix="cursor">
+    <file>Cur/ayuda.cur</file>
+    <file>Cur/No_Disponible.cur</file>
+    <file>Cur/normal.cur</file>
+    <file>Cur/texto.cur</file>
+    <file>Cur/work.cur</file>
+  </qresource>
+</RCC>

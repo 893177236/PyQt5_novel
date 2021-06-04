@@ -1,0 +1,521 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta content="text/html; charset=utf-8">
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>阅读</title>
+    <script type="text/javascript" src="js/jquery-1.7.1.min.js"></script>
+    <script type="text/javascript" src="js/turn4.js"></script>
+    <script type="text/javascript" src="js/qwebchannel.js"></script>
+    <link rel="stylesheet" type="text/css" href="css/loading.css">
+    <link rel="stylesheet" type="text/css" href="css/novel.css">
+    <link rel="stylesheet" type="text/css" href="css/main.css">
+    <link rel="stylesheet" type="text/css" href="css/footer.css">
+    <link rel="stylesheet" type="text/css" href="css/footer_background.css">
+    <link rel="stylesheet" type="text/css" href="css/footer_font.css">
+    <link rel="stylesheet" type="text/css" href="css/foot_range.css">
+    <link rel="stylesheet" href="css/font-awesome.css">
+    <script src="js/simpler-sidebar.js"></script>
+    <style id="pageCss"></style>
+    <style id="bgImageSet"></style>
+    <style id="fontSizeSet"></style>
+    <style id="fontLetterSpacingSet"></style>
+    <style id="fontLineHeightSet"></style>
+    <script>
+        page_text = {
+            info: new Array(),
+            purify_info: new Array(),
+            init_page: null,
+            init_scrollTop: null
+        }
+    </script>
+    <script>
+        $.getJSON("./conf/setting.json", function (data, status) {
+            if (status == "success") {
+                let page_scrollTop = data["currentPageScrollTop"];
+                let bg_image = data["background-image"];
+                let font_size = data["font-size"];
+                let font_letter_spacing = data["letter-spacing"];
+                let font_inline_height = data["line-height"];
+                page_text.init_scrollTop = page_scrollTop;
+                if (bg_image != "") {
+                    if (bg_image.indexOf("宁静夜色") != -1) {
+                        $("#bgImageSet")[0].innerHTML = `
+                    #pages div.page{
+                        color:#ffffff;
+                        background-repeat:no-repeat;
+                        background-size:100% 100%;
+                        background-image:url(`+ bg_image + ".jpg);}";
+                    } else {
+                        $("#bgImageSet")[0].innerHTML = `
+                    #pages div.page{
+                        background-repeat:no-repeat;
+                        background-size:100% 100%;
+                        background-image:url(`+ bg_image + ".jpg);}";
+                    }
+                }
+                if (font_size != "") {
+                    $("#fontSizeSet")[0].innerHTML = `
+                    #pages div.page{font-size:`+ font_size + "px;}";
+                }
+                if (font_letter_spacing != "") {
+                    $("#fontLetterSpacingSet")[0].innerHTML = `
+                    #pages div.page{letter-spacing:`+ font_letter_spacing + "px;}";
+                }
+                if (font_inline_height != "") {
+                    $("#fontLineHeightSet")[0].innerHTML = `
+                    #pages div.page{line-height:`+ font_inline_height + "px;}";
+                }
+            }
+        })
+    </script>
+</head>
+
+<body>
+    <!-- 加载提示 -->
+    <div class="load">
+        <div class="loader" title="2">
+            <svg version="1.1" id="loader-1" x="0px" y="0px" width="100px" height="100px" viewBox="0 0 50 50"
+                style="enable-background:new 0 0 50 50;" xml:space="preserve">
+                <path fill="#000"
+                    d="M43.935,25.145c0-10.318-8.364-18.683-18.683-18.683c-10.318,0-18.683,8.365-18.683,18.683h4.068c0-8.071,6.543-14.615,14.615-14.615c8.072,0,14.615,6.543,14.615,14.615H43.935z">
+                    <animateTransform attributeType="xml" attributeName="transform" type="rotate" from="0 25 25"
+                        to="360 25 25" dur="0.6s" repeatCount="indefinite" />
+                </path>
+            </svg>
+            <div class="load-msg"> 加载中,请稍后....</div>
+        </div>
+    </div>
+    <!-- 正文标题 -->
+    <div class="page_title">
+        <p></p>
+    </div>
+    <!-- 正文内容 -->
+    <div id="magazine">
+        <div id="pages">
+            <!-- 等待添加 -->
+        </div>
+    </div>
+    <!-- 底部提示 -->
+    <div id="alert"></div>
+    <!-- 背景工具栏 -->
+    <div class="foot_menu_bg menu_bg_foot bg_t">
+        <ul class="menu_foot_flex">
+            <li class="flex menu_foot_f">
+                <button class="bg_1 bg_w_h bg_image_click" imageValue="边彩画布"></button>
+                <button class="bg_2 bg_w_h bg_image_click" imageValue="护眼漫绿"></button>
+                <button class="bg_3 bg_w_h bg_image_click" imageValue="明媚倾城"></button>
+                <button class="bg_4 bg_w_h bg_image_click" imageValue="宁静夜色"></button>
+                <button class="bg_5 bg_w_h bg_image_click" imageValue="清新时光"></button>
+                <button class="bg_6 bg_w_h bg_image_click" imageValue="山水画"></button>
+                <button class="bg_7 bg_w_h bg_image_click" imageValue="山水墨影"></button>
+                <button class="bg_8 bg_w_h bg_image_click" imageValue="深宫魅影"></button>
+                <button class="bg_9 bg_w_h bg_image_click" imageValue="午后沙滩"></button>
+                <button class="bg_10 bg_w_h bg_image_click" imageValue="新羊皮纸"></button>
+                <button class="bg_11 bg_w_h bg_image_click" imageValue="羊皮纸1"></button>
+                <button class="bg_12 bg_w_h bg_image_click" imageValue="羊皮纸2"></button>
+                <button class="bg_13 bg_w_h bg_image_click" imageValue="羊皮纸3"></button>
+                <button class="bg_14 bg_w_h bg_image_click" imageValue="羊皮纸4"></button>
+            </li>
+        </ul>
+    </div>
+    <!-- 字体设置工具栏 -->
+    <div class="foot_menu_font menu_bg_foot bg_t">
+        <ul class="menu_foot_flex">
+            <li class="flex menu_foot_f">
+                <div class="font_line">
+                    <p class="foot_font_size">字号</p>
+                    <input type="range" class="range" min="5" max="50" v-model="rangevalue" value="21">
+                    <h1 style="--s:21;" class="range_h1">21</h1>
+                </div>
+                <div class="font_line">
+                    <p class="foot_font_size">字距</p>
+                    <input type="range" class="range_ipt2" min="-10" max="50" v-model="rangevalue" value="0">
+                    <h1 style="--s:0;" class="range_h2">0</h1>
+                </div>
+                <div class="font_line">
+                    <p class="foot_font_size">行距</p>
+                    <input type="range" class="range_ipt3" min="0" max="50" v-model="rangevalue" value="21">
+                    <h1 style="--s:0;" class="range_h3">21</h1>
+                </div>
+            </li>
+        </ul>
+    </div>
+    <!-- 底部工具栏 -->
+    <div class="comiis_foot_memu bg_foot b_t">
+        <ul class="comiis_flex">
+            <li class="flex f_foot">
+                <a href="javascript:void(0)" title="目录" id="foot_catalog">
+                    <i class="fa fa-list-ul">目录</i>
+                </a>
+            </li>
+            <li class="flex f_foot">
+                <a href="javascript:void(0)" title="背景" id="foot_bg_image">
+                    <i class="fa fa-image">背景</i>
+                </a>
+            </li>
+            <li class="flex f_foot">
+                <a href="javascript:void(0)" title="字体" id="foot_font_set">
+                    <i class="fa fa-text-height">字体</i>
+                </a>
+            </li>
+        </ul>
+    </div>
+
+    <!-- 侧边栏 -->
+    <div class="sidebar main left" id="sidebar-main">
+        <div class="wrapper">
+            <nav>
+                <ul>
+                </ul>
+            </nav>
+        </div>
+    </div>
+</body>
+<script>
+    let chapterTime = null;
+    $("document").ready(function () {
+        var $mainSidebar = $("#sidebar-main");
+        $mainSidebar.simplerSidebar({
+            attr: "sidebar-main",
+            selectors: {
+                trigger: "#sidebar-main-trigger",
+                quitter: ".quitter"
+            },
+            animation: {
+                easing: "easeOutQuint"
+            }
+        });
+    });
+
+</script>
+
+<script>
+    (function ($) {
+        $("#foot_catalog").on("click", function () { //目录按钮点击事件
+            let currentLeft = parseInt($("#sidebar-main").css("left"));
+            // let sidebarLeft = 0-parseInt($("#sidebar-main").css("width"));
+            if (currentLeft == 0) {
+                // sidebarLeft.toString()+"px"
+                $("#sidebar-main").css("left", "-18%");
+            } else {
+                $("#sidebar-main").css("left", "0px");
+            }
+        });
+        
+        $("#foot_bg_image").on("click", function () { //背景按钮点击事件
+            if ($(".foot_menu_bg").is(":hidden") == true) {
+                $(".foot_menu_bg").show()
+            } else {
+                $(".foot_menu_bg").hide()
+            }
+        })
+
+        $("#foot_font_set").on("click", function () { //字体按钮点击事件
+            if ($(".foot_menu_font").is(":hidden") == true) {
+                $(".foot_menu_font").show()
+            } else {
+                $(".foot_menu_font").hide()
+            }
+        })
+
+        $(".bg_image_click").on("click", function () {  //背景布局的背景点击事件
+            let imagePath = $(this).attr("imageValue");
+            window.Bridge.callSaveSetting("background-image", imagePath);
+            if (imagePath.indexOf("宁静夜色") != -1) {
+                $("#bgImageSet")[0].innerHTML =
+                    `#pages div.page {
+                    color:#ffffff;
+                    background-image: url(`+ imagePath + `.jpg);
+            }`;
+            } else {
+                $("#bgImageSet")[0].innerHTML =
+                    `#pages div.page {
+                    background-image: url(`+ imagePath + `.jpg);
+            }`;
+            }
+        })
+
+        $(".range").on('input propertychange', (e) => {  //字体布局的字号range拖动事件
+            $(".range_h1")[0].innerHTML = e.currentTarget.value;
+            $(".range_h1")[0].attributes.style.value = "--s: " + e.currentTarget.value.toString();
+            window.Bridge.callSaveSetting("font-size", e.currentTarget.value.toString());
+            $("#fontSizeSet")[0].innerHTML =
+                `#pages div.page {
+            font-size: `+ e.currentTarget.value.toString() + `px;
+        }
+        `;
+        })
+
+        $(".range_ipt2").on('input propertychange', (e) => {  //字体布局的字距range拖动事件
+            $(".range_h2")[0].innerHTML = e.currentTarget.value;
+            $(".range_h2")[0].attributes.style.value = "--s: " + e.currentTarget.value.toString();
+            window.Bridge.callSaveSetting("letter-spacing", e.currentTarget.value.toString());
+            $("#fontLetterSpacingSet")[0].innerHTML =
+                `#pages div.page {
+            letter-spacing: `+ e.currentTarget.value.toString() + `px;
+        }
+        `;
+        })
+
+        $(".range_ipt3").on('input propertychange', (e) => {  //字体布局的行距range拖动事件
+            $(".range_h3")[0].innerHTML = e.currentTarget.value;
+            $(".range_h3")[0].attributes.style.value = "--s: " + e.currentTarget.value.toString();
+            window.Bridge.callSaveSetting("line-height", e.currentTarget.value.toString());
+            $("#fontLineHeightSet")[0].innerHTML =
+                `#pages div.page {
+            line-height: `+ e.currentTarget.value.toString() + `px;
+        }
+        `;
+        })
+
+        new QWebChannel(qt.webChannelTransport,
+            function (channel) {
+                window.Bridge = channel.objects.Bridge;
+                // 这里绑定窗口的标题变化信号（这个信号是由QWidget内部的）
+                /*Bridge.windowTitleChanged.connect(function(title) {
+                        alert("标题被修改为：" + title);
+                });
+                */
+                page_text.info = Bridge.getArrayBookInfo;
+                page_text.init_page = Bridge.getCurrentPage;
+                page_text.purify_info = Bridge.getPurifyInfo;
+                init__();
+            }
+        )
+    }(jQuery));
+
+</script>
+
+<script>
+    function init__() {
+        $(".load").hide();
+        var $alert = $("#alert"); //底部提示
+        var timer = null; //底部提示时间
+        var $wrap = $("#magazine"); //主界面
+        var $page = $("#pages"); //页面
+        var page_width = $page.width(); //窗口的宽度
+        var page_height = $page.height(); //窗口的高度
+        let chapterContent = "";
+        let chapterName = "";
+        $.each(page_text.info, function (index, value) {
+            chapterContent = chapterContent + ("<div hascontent=1>" + replaceText(value["chapterContent"]) + "</div>");
+            chapterName = chapterName + ('<li><a href="javascript:void(0)" page="' + value["chapterNum"]
+                + '" class="jumppage">' + value["chapterName"] + '</a></li>');
+        });
+        $page.append(chapterContent);
+        $(".wrapper nav ul").append(chapterName);
+
+        function replaceText(text) {
+            $.each(page_text.purify_info, function (index, value) {
+                if (value["enable"] == 2) {
+                    if (value["isRexp"] == 2) {
+                        //正则替换
+                        let rexp = new RegExp(value["replaceRule"], "g");
+                        text = text.replace(rexp, value["replaceAfterText"])
+                    } else {
+                        //普通替换
+                        text = text.split(value["replaceRule"]).join(value["replaceAfterText"])
+                    }
+                }
+            })
+            return text;
+        }
+
+        $("a[class='jumppage']").click(function (e) {
+            let thisObjPage = $(this).attr("page");
+            if ($("#pages").turn("hasPage", thisObjPage) == true) {
+                $("#pages").turn("page", thisObjPage);
+            } else {
+                clearTimeout(chapterTime);
+                $("#alert").text("该页面不存在");
+                $("#alert").fadeIn();
+                chapterTime = setTimeout(function () {
+                    $("#alert").fadeOut();
+                }, 1000)
+            }
+        })
+
+        $page.turn({
+            width: page_width,
+            // height: page_height,
+            height: "94vh",
+            elevation: 50,
+            inclination: 0,
+            acceleration: true, //硬件加速, 默认true, 如果是触摸设备设置为true
+            duration: 600,     //翻页速度(毫秒), 默认600ms
+            display: 'single',  //单页显示/双页显示  single/double
+            gradients: true,   //翻页时的阴影渐变, 默认true
+            autoCenter: true,  //自动居中, 默认false
+            page: page_text.init_page,
+            // pages:1,
+            when: {
+                //页面上的任何一个动作开始触发
+                start: function (event, page, pageObj) {
+                    if (pageObj == 'tl' || pageObj == 'tr' || pageObj == 'bl' || pageObj == 'br') {
+                        event.preventDefault();
+                    }
+                },
+                //页面上的任何一个动作结束触发
+                end: function (event, page, pageObj) { },
+
+                //翻页前触发
+                turning: function (event, page, view) {
+                    let currentPage = page.toString();
+                    let chapterNamePageClassName = ".jumppage[page='" + currentPage + "']";
+                    let currentChapterCss = chapterNamePageClassName + '{color:white;}';
+                    $(".wrapper").scrollTop($(chapterNamePageClassName).parent()[0].offsetTop);
+                    console.log("当前页：" + currentPage + ", 跳转滚动条：" + $(chapterNamePageClassName).parent()[0].offsetTop.toString());
+
+                    $("#pageCss")[0].innerHTML = currentChapterCss;
+                    $(".page_title p")[0].innerText = $(chapterNamePageClassName).text();
+
+                    window.Bridge.callSaveSetting("currentPage", page.toString());
+                },
+
+                //翻页后触发
+                turned: function (event, page, view) {
+                },
+
+                //缩放触发
+                //event
+                //newFactor 缩放的倍数
+                //current 缩放前的倍数
+                zooming: function (event, newFactor, current) { },
+
+                //到第一页时触发
+                first: function (event) {
+
+                },
+
+                //到最后一页时触发
+                last: function (event) {
+
+                }
+            }
+        });
+
+        // $page.css("overflow-y","scroll");
+        $(window).resize(function () { //自适应拉伸
+            $('#pages').turn('size', $(window).width(), "94vh");
+            $("#alert").width(parseInt($(window).width() * 0.12)).height(parseInt($(window).height() * 0.02));
+            $("#alert").css("font-size", $("#alert").height());
+            $("#alert").css("font-family", "Microsoft YaHei");
+        })
+
+        var x, y;
+        $wrap.mousedown(function (e) { //获取鼠标按下的位置
+            x = e.pageX;
+            y = e.pageY;
+        });
+
+        $wrap.mouseup(function (e) { //获取鼠标按下的位置
+            var newX = e.pageX;
+            var newY = e.pageY;
+            var e = e || window.event;
+            var top = e.pageY;  //获得当前点击位置距离浏览器顶部的距离
+            var left = e.pageX;  //获得当前点击位置距离浏览器左侧的距离
+            let windowWidth = $("#magazine").width();  //浏览器宽
+            let windowHeight = $("#magazine").height();  //浏览器高
+            let threePointsWidth_left = windowWidth / 3; //最左侧区域1/3
+            let threePointsWidth_right = windowWidth / 3 * 2; //最右侧区域2/3
+            var pageCount = $page.turn("pages"); //总页数
+            var currentPage = $page.turn("page"); //当前页
+            var progress = (currentPage / pageCount).toFixed(2); //页数进度
+
+            if (x == newX && y == newY && e.button == 0) {
+                //位置相同的操作
+                if (left <= threePointsWidth_left && left >= 0) { //左侧区域 上一页
+                    previousPage(currentPage);
+                } else if (left >= threePointsWidth_right && left <= windowWidth) { //右侧区域 下一页
+                    nextPage(currentPage, pageCount);
+                } else { //中间区域 显示工具 待完成
+                    console.log("中间区域");
+                    let currentFooterHeight = 0 - parseInt($(".comiis_foot_memu").css("height"));
+                    let currentFooterBottom = parseInt($(".comiis_foot_memu").css("bottom"));
+                    if (currentFooterBottom == 0) {
+                        $(".comiis_foot_memu.bg_foot.b_t").css("bottom", currentFooterHeight.toString() + "px");
+                        $("#sidebar-main").css("left", "-18vw");
+                        $("#pages").turn("size", "100vw", "94vh")
+                    } else {
+                        $("#pages").turn("size", "100vw", "87vh")
+                        $(".comiis_foot_memu.bg_foot.b_t").css("bottom", "0vw");
+                    }
+                    console.log(currentFooterBottom);
+                    if ($(".foot_menu_bg").is(":visible") == true) {
+                        $(".foot_menu_bg").hide();
+                    }
+                    if ($(".foot_menu_font").is(":visible") == true) {
+                        $(".foot_menu_font").hide();
+                    }
+                }
+            }
+            else {
+                //位置不同的操作
+                // console.log(x)
+                // console.log(newX)
+                // console.log(y)
+                // console.log(newY)
+                // console.log(e.button)
+            }
+        });
+
+        $(document).keydown(function (event) { //键盘监听 
+            // ←  ↑  →  ↓
+            // 37 38 39 40
+            if (event.keyCode == 37) {//←
+                // $page.turn('previous')
+                previousPage($page.turn("page"))
+            }
+            if (event.keyCode == 39) {//→
+                // $page.turn('next')
+                nextPage($page.turn("page"), $page.turn("pages"))
+            }
+        });
+
+        function previousPage(currentPage) { //上一页
+            if (currentPage > 1) {
+                $page.turn('previous');
+            } else {
+                showAlert('已经是第一页');
+            }
+
+        }
+        function nextPage(currentPage, pageCount) { //下一页
+            if (currentPage < pageCount) {
+                $page.turn('next')
+            } else {
+                showAlert('已经是最后一页');
+            }
+
+        }
+
+        function showAlert(msg) { //显示底部提示
+            clearTimeout(timer);
+            $alert.text(msg);
+            $alert.fadeIn();
+            timer = setTimeout(function () {
+                $alert.fadeOut();
+            }, 1000)
+        }
+
+        (function ($) {
+            // $(".page").scroll(function(event){
+            //     window.Bridge.callSaveSetting("currentPageScrollTop",event.currentTarget.scrollTop.toString())
+            // });
+            setInterval(function () {
+                let currentPageClassName = ".page.p" + $("#pages").turn("page").toString();
+                // console.log("当前scrolltop:",$(currentPageClassName ).scrollTop().toString())
+                window.Bridge.callSaveSetting("currentPageScrollTop", $(currentPageClassName).scrollTop().toString());
+
+            }, 10000)
+            $(".page_title p")[0].innerText = $(".jumppage[page='" + $("#pages").turn("page").toString() + "']").text();
+            $(".page.p" + $("#pages").turn("page").toString()).scrollTop(page_text.init_scrollTop);
+        })(jQuery)
+
+    }
+</script>
+
+
+</html>

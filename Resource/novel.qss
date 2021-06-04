@@ -1,0 +1,636 @@
+/*全体按钮按下偏移*/
+/*QPushButton:pressed{*/
+/*    padding-left:3px;*/
+/*    padding-top:3px;*/
+/*}*/
+
+/*===================
+  红绿黄三原色按钮美化*/
+QPushButton#btn_red {
+    background: #F76677;
+    border-radius: 5px;
+}
+
+QPushButton#btn_red:hover {
+    background: red;
+}
+
+QPushButton#btn_yellow {
+    background: #F7D674;
+    border-radius: 5px;
+}
+
+QPushButton#btn_yellow:hover {
+    background: yellow;
+}
+
+QPushButton#btn_green {
+    background: #6DDF6D;
+    border-radius: 5px;
+}
+
+QPushButton#btn_green:hover {
+    background: green;
+}
+
+/*===================*/
+
+/*===================*
+  搜索输入文本框*/
+QLineEdit#edit_search {
+    border: 2px solid #c4c7ce;
+}
+
+QLineEdit#edit_search {
+    background: #f3f3f3;
+    background-image: url(:/icon/icon/search.png);
+    background-repeat: no-repeat;
+    background-position: left;
+    color: #252424;
+    font-family: Microsoft YaHei;
+    font-size: 16px;
+    padding: 2 2 2 20;
+    border: 1px solid #dddddd;
+}
+
+QLineEdit#edit_search {
+    border-radius: 10px;
+    border: 2px solid #c4c7ce;
+
+}
+
+/*===================*/
+
+/*===================
+  左侧侧边栏 书架 下载 规则 Xpath 设置按钮*/
+QPushButton#btn_lessmore,
+QPushButton#btn_main,
+QPushButton#btn_download,
+QPushButton#btn_manage,
+QPushButton#btn_getbook,
+QPushButton#btn_setting,
+QPushButton#btn_xpath,
+QPushButton#btn_rule {
+    border: none;
+    color: white;
+    text-align: left center;
+	padding-left:3px;
+}
+
+QFrame#frame_main_down_bookshelf:hover,
+QFrame#frame_main_down_download:hover,
+QFrame#frame_main_down_manage:hover,
+QFrame#frame_main_down_lessmore:hover,
+QFrame#frame_main_down_rule:hover,
+QFrame#frame_main_down_xpath:hover,
+QFrame#frame_main_down_setting:hover{
+    background-color: rgba(167, 167, 167,1);
+}
+/*
+QPushButton#btn_lessmore:hover,
+QPushButton#btn_main:hover,
+QPushButton#btn_download:hover,
+QPushButton#btn_getbook:hover,
+QPushButton#btn_setting:hover,
+QPushButton#btn_rule:hover {
+    border-left: 4px;
+    font-weight: 700;
+    background-color: #a7a7a7;
+    border-radius: 6px;
+}
+*/
+QPushButton#btn_lessmore:pressed,
+QPushButton#btn_getbook:pressed,
+QPushButton#btn_download:pressed,
+QPushButton#btn_manage:pressed,
+QPushButton#btn_main:pressed,
+QPushButton#btn_rule:pressed,
+QPushButton#btn_xpath:pressed,
+QPushButton#btn_setting:pressed,
+
+QPushButton#btn_getbook_small:pressed,
+QPushButton#btn_download_small:pressed,
+QPushButton#btn_manage_small:pressed,
+QPushButton#btn_main_small:pressed,
+QPushButton#btn_setting_small:pressed,
+QPushButton#btn_rule_small:pressed,
+QPushButton#btn_xpath_small:pressed,
+QPushButton#btn_more:pressed{
+    padding-left: 3px;
+    padding-top: 3px;
+}
+/*===================*/
+
+/*===================
+  左侧主页 下载 规则 设置按钮*/
+QPushButton#btn_more,
+QPushButton#btn_getbook_small,
+QPushButton#btn_download_small,
+QPushButton#btn_main_small,
+QPushButton#btn_rule_small,
+QPushButton#btn_xpath,
+QPushButton#btn_setting_small{
+	border:none;
+	color:white;
+}
+/*QPushButton#btn_more:hover,*/
+/*QPushButton#btn_getbook_small:hover,*/
+/*QPushButton#btn_download_small:hover,*/
+/*QPushButton#btn_main_small:hover,*/
+/*QPushButton#btn_rule_small:hover,*/
+/*QPushButton#btn_xpath:hover,*/
+/*QPushButton#btn_setting_small:hover{*/
+/*	border-left:4px;*/
+/*	font-weight:700;*/
+/*}*/
+/*===================*/
+QWidget#widget_main_left {
+    background: gray;
+    border-top: 1px solid gray;
+    border-bottom: 1px solid gray;
+    border-left: 1px solid gray;
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
+}
+
+QWidget#widget_main_left_small{
+    background:gray;
+    border-top:1px solid gray;
+    border-bottom:1px solid gray;
+    border-left:1px solid gray;
+    border-top-left-radius:10px;
+    border-bottom-left-radius:10px;
+}
+
+
+
+QStackedWidget#stackedWidget {
+    background: white;
+    border-top: 1px solid white;
+    border-bottom: 1px solid white;
+    border-left: 1px solid white;
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+}
+
+
+/*===================
+  拖动条*/
+QScrollBar:vertical {
+    border: none;
+    background: #f5f5f7;
+    width: 10px;
+    margin: 0px 0 0px 0;
+}
+
+QScrollBar::handle:vertical {
+    background: Gainsboro;
+    min-height: 20px;
+    border-radius: 5px;
+    border: none;
+}
+
+QScrollBar::add-line:vertical {
+    border: 0px solid grey;
+    background: #32CC99;
+    height: 0px;
+    subcontrol-position: bottom;
+    subcontrol-origin: margin;
+}
+
+QScrollBar::sub-line:vertical {
+    border: 0px solid grey;
+    background: #32CC99;
+    height: 0px;
+    subcontrol-position: top;
+    subcontrol-origin: margin;
+}
+
+QScrollBar::add-page:vertical,
+QScrollBar::sub-page:vertical {
+    background: none;
+    width: 0px;
+    height: 0px;
+}
+
+/*===================*/
+/*搜索界面widget
+QScrollArea#scrollArea_searhResult,
+QWidget#scrollArea_searh_result_scrollAreaWidgetContents {
+    color: #232C51;
+    background: transparent;
+    border-top: 1px solid darkGray;
+    border-bottom: 1px solid darkGray;
+    border-right: 1px solid darkGray;
+
+}
+*/
+
+/*===================
+	   搜索按钮
+*/
+QPushButton#btn_search {
+
+    border-radius: 6px;
+    line-height: 1.5;
+    background: #4e6ef2;
+    color: #fff;
+    font-weight: 700;
+    text-align: center;
+    padding: 6px;
+    border: 2px solid #E5E5E5;
+
+}
+
+QPushButton#btn_search:pressed {
+    padding-left: 80px;
+    padding-top: 80px;
+}
+
+QPushButton#btn_search:hover {
+    background: #4662d9 !important;
+    color: #fff;
+    /*cursor: pointer;*/
+    border: 2px solid #73A6F8;
+}
+
+/*===================*/
+
+
+/*===================
+	   规则区域搜索框
+*/
+
+
+/*===================*/
+
+QWidget#scrollAreaWidgetContents_rule,
+QListWidget#listWidget_rule_userRule,
+QListWidget#listWidget_purify
+{
+    background-color: rgba(255, 255, 224, 10%);
+}
+
+QComboBox#comboBox_method {
+    background-color: white;
+}
+
+/*===================
+	   设置区域 保存文件地址输入框，进度，提示音
+*/
+QLineEdit#lineEdit_getUserFindText,
+QLineEdit#lineEdit_testXpath_two_element_child,
+QLineEdit#lineEdit_testXpath_two_element,
+QLineEdit#lineEdit_testXpath_getText,
+QLineEdit#lineEdit_getUrl_charset,
+QLineEdit#lineEdit_getUrl_url,
+QLineEdit#lineEdit_search,
+QLineEdit#lineEdit_setting_downloadLocation,
+QLineEdit#edit_setting_processNums,
+QLineEdit#lineEdit_setting_finishMusic,
+QLineEdit#lineEdit_debugrule_search{
+    outline-style: none;
+    border: 1px solid #ccc;
+    font: 16px;
+    border-radius: 3px;
+    padding: 6px 6px;
+    font-family: Microsoft YaHei;
+}
+
+
+/*===================
+	   规则区域 删除，网络导入，本地导入，保存
+*/
+QPushButton#btn_rule_del,
+QPushButton#btn_rule_local_import,
+QPushButton#btn_rule_net_import,
+QPushButton#btn_rule_add,
+QPushButton#btn_rule_save,
+QPushButton#btn_getUrl_implement,
+QPushButton#btn_testXpath_implement,
+QPushButton#btn_testXpath_implement_two,
+QPushButton#btn_setting_save,
+QPushButton#btn_setting_reset,
+QPushButton#btn_setting_downloadLocation,
+QPushButton#btn_setting_finishMusic,
+QPushButton#btn_manage_del,
+
+QPushButton#btn_purify_local_import,
+QPushButton#btn_purify_net_import,
+QPushButton#btn_purify_del_listwidget,
+QPushButton#btn_purify_add_listwidget,
+QPushButton#btn_purify_save
+{
+    /* 文字颜色 */
+    color: #0099CC;
+    /* 清除背景色 */
+    background: transparent;
+    /* 边框样式、颜色、宽度 */
+    border: 2px solid #0099CC;
+    /* 给边框添加圆角 */
+    border-radius: 6px;
+    /* 字母转大写 */
+    border: none;
+    color: white;
+    padding: 6px 12px;
+    text-align: center;
+    /*display: inline-block;*/
+    font-size: 15px;
+    margin: 4px 2px;
+    /*-webkit-transition-duration: 0.4s; !* Safari *!*/
+    /*transition-duration: 0.4s;*/
+    /*cursor: pointer;*/
+    text-decoration: none;
+    text-transform: uppercase;
+
+    background-color: white;
+    color: black;
+    border: 2px solid #008CBA;
+}
+
+/* 悬停样式 */
+QPushButton#btn_rule_del:hover,
+QPushButton#btn_rule_local_import:hover,
+QPushButton#btn_rule_net_import:hover,
+QPushButton#btn_rule_add:hover,
+QPushButton#btn_rule_save:hover,
+QPushButton#btn_getUrl_implement:hover,
+QPushButton#btn_testXpath_implement:hover,
+QPushButton#btn_testXpath_implement_two:hover,
+QPushButton#btn_setting_save:hover,
+QPushButton#btn_setting_reset:hover,
+QPushButton#btn_setting_downloadLocation:hover,
+QPushButton#btn_setting_finishMusic:hover,
+QPushButton#btn_manage_del:hover,
+
+QPushButton#btn_purify_local_import:hover,
+QPushButton#btn_purify_net_import:hover,
+QPushButton#btn_purify_del_listwidget:hover,
+QPushButton#btn_purify_add_listwidget:hover,
+QPushButton#btn_purify_save:hover
+{
+    background-color: #008CBA;
+    color: white;
+}
+
+/*按下样式*/
+QPushButton#btn_rule_del:pressed,
+QPushButton#btn_rule_local_import:pressed,
+QPushButton#btn_rule_net_import:pressed,
+QPushButton#btn_rule_add:pressed,
+QPushButton#btn_rule_save:pressed,
+QPushButton#btn_getUrl_implement:pressed,
+QPushButton#btn_testXpath_implement:pressed,
+QPushButton#btn_testXpath_implement_twopressed,
+QPushButton#btn_setting_save:pressed,
+QPushButton#btn_setting_reset:pressed,
+QPushButton#btn_setting_downloadLocation:pressed,
+QPushButton#btn_setting_finishMusic:pressed,
+QPushButton#btn_manage_del:pressed,
+
+QPushButton#btn_purify_local_import:pressed,
+QPushButton#btn_purify_net_import:pressed,
+QPushButton#btn_purify_del_listwidget:pressed,
+QPushButton#btn_purify_add_listwidget:pressed,
+QPushButton#btn_purify_save:pressed
+{
+    padding-left: 16px;
+    padding-top: 9px;
+}
+
+/*===================*/
+
+/*===================
+    清除背景
+*/
+QScrollArea#scrollArea_searhResult,
+QWidget#scrollArea_searh_result_scrollAreaWidgetContents,
+QFrame#frame_download,
+QWidget#scrollArea_download_scrollAreaWidgetContents,
+QScrollArea#scrollArea_download,
+QScrollArea#scrollArea_setting,
+QWidget#scrollAreaWidgetContents_setting,
+QWidget#scrollAreaWidgetContents_bookshelf,
+QPushButton#btn_manage_refresh{
+    background: transparent;
+}
+
+/*QPushButton#btn_main_left,*/
+/*QPushButton#btn_download_left,*/
+/*QPushButton#btn_rule_left,*/
+/*QPushButton#btn_setting_left,*/
+/*QPushButton#btn_getbook_small_left,*/
+/*QPushButton#btn_main_small_left,*/
+/*QPushButton#btn_download_small_left,*/
+/*QPushButton#btn_rule_small_left,*/
+/*QPushButton#btn_setting_small_left{*/
+/*    background: transparent;*/
+/*}*/
+
+QPushButton#btn_setting_downloadLocation:hover,
+QPushButton#btn_setting_finishMusic:hover {
+    background-color: #008CBA;
+    color: white;
+}
+
+QProgressBar::chunk {
+    background-color: #05B8CC;
+    width: 20px;
+}
+
+QProgressBar {
+    border: 2px solid grey;
+    border-radius: 5px;
+    text-align: center;
+}
+
+/*QProgressBar::chunk {*/
+/*    background-color: #CD96CD;*/
+/*    width: 10px;*/
+/*    margin: 0.5px;*/
+/*}*/
+/*上一个 下一个 关闭*/
+QPushButton#btn_getText_pre{
+    border-image:url('./Resource/icon/pre128black.png');
+}
+QPushButton#btn_getText_next{
+    border-image:url('./Resource/icon/next128black.png');
+}
+QPushButton#btn_getText_close{
+    border-image:url('./Resource/icon/close128black.png');
+}
+QPushButton#btn_getText_pre:pressed{
+    border-image:url('./Resource/icon/pre128blue.png');
+}
+QPushButton#btn_getText_next:pressed{
+    border-image:url('./Resource/icon/next128blue.png');
+}
+QPushButton#btn_getText_close:pressed{
+    border-image:url('./Resource/icon/close128blue.png');
+}
+
+QPushButton#btn_searchResult_toDownload{
+	color:#09AAFF;
+	border:1px solid #C3EAFF;
+	border-radius:4px;
+	background-color:#fff;
+}
+QPushButton#btn_searchResult_toDownload:hover{
+	color:#0098EA;
+}
+QPushButton#btn_searchResult_toDownload:pressed{
+	color:#ccc;
+	background-color:#333;
+}
+
+
+QPushButton#btn_downloadlayout_addtobook,
+QPushButton#btn_downloadlayout_openfile,
+QPushButton#btn_downloadlayout_deletelayoutinfo{
+	color:#00a1d6;
+	border:1px solid #00a1d6;
+	border-radius:2px;
+	background-color:#fff;
+}
+QPushButton#btn_downloadlayout_addtobook:hover,
+QPushButton#btn_downloadlayout_openfile:hover,
+QPushButton#btn_downloadlayout_deletelayoutinfo:hover{
+	color:#fff;
+	background-color:#00a1d6;
+}
+QPushButton#btn_downloadlayout_addtobook:pressed,
+QPushButton#btn_downloadlayout_openfile:pressed,
+QPushButton#btn_downloadlayout_deletelayoutinfo:pressed{
+	background-color:#2980b9;
+}
+/*设置中的清理缓存按钮*/
+QPushButton#btn_setting_cache_clear{
+	color:#000000;
+	border:1px solid #eaedf3;
+	background-color: #eaedf3;
+}
+QPushButton#btn_setting_cache_clear:hover{
+	background-color: #d5d8e0;
+}
+/*调试返回按钮*/
+QPushButton#btn_backtorule{
+    border: none;
+    color: #515151;
+    text-align: left center;
+	padding-left:3px;
+}
+
+QPushButton#btn_backtorule:pressed,
+QPushButton#btn_manage_refresh:pressed{
+    padding-left: 4px;
+    padding-top: 2px;
+}
+/*debug的text文本框*/
+QTextEdit#textEdit_markdown_result{
+    border: 1px solid #ccc;
+    border-radius: 3px;
+}
+QPushButton#btn_debug{
+    border-image:url('./Resource/icon/nsearch48.png');
+}
+QPushButton#btn_debug:hover{
+    border-image:url('./Resource/icon/npsearch48.png');
+}
+QPushButton#btn_debug:pressed{
+    border-image:url('./Resource/icon/nsearch48.png');
+    background-color: #0078d7;
+}
+QPushButton#btn_search_image{
+    border-image:url('./Resource/icon/nsearch48.png');
+}
+QPushButton#btn_search_image:hover{
+    border-image:url('./Resource/icon/npsearch48.png');
+}
+QPushButton#btn_search_image:pressed{
+    border-image:url('./Resource/icon/nsearch48.png');
+    background-color: #0078d7;
+}
+/*checkbox样式设置*/
+QCheckBox#checkbox_enable::indicator {
+    width: 35px;
+    height: 45px;
+    background-color: transparent;
+}
+/*选中*/
+QCheckBox#checkbox_enable::indicator::checked {
+    image: url("./Resource/icon/checkbox_checked.png");
+}
+/*未选中*/
+QCheckBox#checkbox_enable::indicator::unchecked {
+    image: url("./Resource/icon/checkbox_unchecked.png");
+}
+/* 未下拉时，QComboBox的样式 */
+QComboBox {
+    border: 1px solid gray;   /* 边框 */
+    border-radius:2px;   /* 圆角 */
+    padding: 0px 0px 0px 10px; /* 上内边距、右内边距、下内边距、左内边距 */
+    /*color: rgba(51,51,51,1);*/
+    /*font: normal normal 15px "Microsoft YaHei";*/
+    text-align: AlignHCenter;
+
+    /*color:rgb(123,123,123);!*字体颜色*!*/
+    color:#000000;
+    background-color: transparent;
+    /*border-image: url(:/png/60.png);!*背景图片，圆角*!*/
+}
+
+/* 下拉后，整个下拉窗体样式 */
+QComboBox QAbstractItemView {
+    outline: 0px solid gray;   /* 选定项的虚框 */
+	border:1px solid #008cba;
+    padding-top: 3px;
+    padding-bottom:3px;
+    /*color:rgb(123,123,123);*/
+    color: #000000;
+	background-color: rgb(255, 255, 255);
+}
+
+/* 下拉后，整个下拉窗体每项的样式 */
+QComboBox QAbstractItemView::item {
+
+    min-height: 26px;/*每项高度*/
+}
+
+/* 下拉后，整个下拉窗体越过每项的样式 */
+QComboBox QAbstractItemView::item:hover {
+    color:rgb(255,255,255);
+}
+
+/* 下拉后，整个下拉窗体被选择的每项的样式 */
+QComboBox QAbstractItemView::item:selected {
+    color:rgb(255,255,255);
+
+}
+
+        /*spinbox 抬起样式*/
+QDateTimeEdit::up-button,QTimeEdit::up-button,QDoubleSpinBox::up-button,QSpinBox::up-button {subcontrol-origin:border;
+    subcontrol-position:right;
+    image: url(./Resource/icon/Icon_f_add.png);
+    width: 20px;
+    height: 20px;
+}
+QDateTimeEdit::down-button,QTimeEdit::down-button,QDoubleSpinBox::down-button,QSpinBox::down-button {subcontrol-origin:border;
+    subcontrol-position:left;
+    image: url(./Resource/icon/Icon_f_reduce.png);
+    width: 20px;
+    height: 20px;
+}
+/*按钮按下样式*/
+QDateTimeEdit::up-button:pressed,QTimeEdit::up-button:pressed,QDoubleSpinBox::up-button:pressed,QSpinBox::up-button:pressed{subcontrol-origin:border;
+    subcontrol-position:right;
+    image: url(./Resource/icon/Icon_f_add_click.png);
+    width: 20px;
+    height: 20px;
+}
+
+QDateTimeEdit::down-button:pressed,QTimeEdit::down-button:pressed,QDoubleSpinBox::down-button:pressed,QSpinBox::down-button:pressed{
+    subcontrol-position:left;
+    image: url(./Resource/icon/Icon_f_reduce_click.png);
+    width: 20px;
+    height: 20px;
+}

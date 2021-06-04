@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans">
+<head>
+    <meta content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+    <title>阅读</title>
+    <style type="text/css">
+        * {
+            padding: 0;
+            margin: 0;
+        }
+
+        html,
+        body {
+            height: 100%;
+            width: 100%;
+        }
+
+        #magazine {
+            width: 100%;
+            height: 100%;
+            position: relative;
+            overflow: hidden;
+        }
+
+        #pages {
+            width: 100%;
+            height: 100%;
+            position: relative;
+            z-index: 1;
+        }
+
+            #pages div.turn-page {
+                background: #fff;
+            }
+
+        #content {
+            height: 0;
+            overflow: hidden;
+            width: 100%;
+        }
+
+        #contentText {
+            width: 100%;
+        }
+
+        /* 这里是内容的样式,修改时候,一起修改 */
+        div.turn-page, #contentText {
+            white-space: pre-wrap;
+            box-sizing: border-box;
+            padding: 0 10px;
+        }
+
+
+        #alert {
+            position: absolute;
+            bottom: 40px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(0,0,0,0.6);
+            border-radius: 4px;
+            color: #fff;
+            z-index: 10;
+            font-size: 12px;
+            padding: 6px 10px;
+            display: none;
+        }
+    </style>
+		
+	<script type="text/javascript" src="jquery-1.7.1.min.js"></script>
+	<script type="text/javascript" src="turn.min.js"></script>
+	<script type="text/javascript" src="qwebchannel.js"></script>
+</head>
+<body>
+
+    <div id="magazine">
+        <div id="pages"></div>
+         <div id = "content" >
+            <div id = "contentText" > </div>
+        </div>
+    </div>
+    <div id="alert"></div>
+ <!--  <script type="text/javascript" src="https://code.jquery.com/jquery-1.7.1.min.js"></script>
+    <script type="text/javascript" src="https://cdn.bootcss.com/turn.js/3/turn.min.js"></script> -->
+
+	<script type="text/javascript">
+		new QWebChannel(qt.webChannelTransport,
+            function(channel) {
+                window.Bridge = channel.objects.Bridge;
+                    // 这里绑定窗口的标题变化信号（这个信号是由QWidget内部的）
+                /*Bridge.windowTitleChanged.connect(function(title) {
+                        alert("标题被修改为：" + title);
+				});
+				*/
+				//let filepath = Bridge.readFilePath;
+				//init_main(filepath);
+				let readStatus = Bridge.readStatus;
+				let readText = Bridge.readText;
+				let readPage = parseInt(Bridge.readPage);
+				let readConfig = Bridge.readConfig;
+				let extraCss = `<style type="text/css">${readConfig}</style>`;
+				$("head").append($(extraCss));
+				init_main(readText,readPage,readStatus);
+				alert("加载完毕");
+
+            }
+        );
+	function clear(){
+		let allpages = parseInt($("#pages").turn("pages"));
+            for(let i=0;i<=allpages;i++){
+                $("#pages").turn("removePage",0);
+            }
+		
+		
+	}
+	init_main = function(writeStr,readPage,readStatus){
+		//var writeStr = "";
+        var $alert = $("#alert");
+        var timer = null;
+		var all_pages_ = null;
+		var now_page_ = null;
+		/*  //模拟请求文本数据
+       $.get(filepath, function (data) {
+		   if(data){
+			   initGetPages(data);
+		   }else{
+			   return;
+		   }
+        })
+*/
+		var initGetPages = function(writeStr){
+			var $wrap = $("#magazine");
+            var $page = $("#pages");
+            var page_width = $page.width(); //窗口的宽度
+            var page_height = $page.height(); //窗口的高度
+
+            var $content = $("#contentText");
+
+            $content.html(writeStr);
+            var len = writeStr.length; //总长度
+            var total_height = $content.height(); //总高度
+            var pageStrNum; //每页大概有多少个字符
+			
+
+			
+            if (total_height > page_height) {
+                pageStrNum = (page_height / total_height) * len; //每页大概有多少个字符
+                var obj = overflowhiddenTow($content, writeStr, page_height);
+                $page.append('<div>' + obj.curr + '</div>');
+                while (obj.next && obj.next.length > 0) {
+                    obj = overflowhiddenTow($content, obj.next, page_height);
+                    $page.append('<div>' + obj.curr + '</div>');
+                }
+
+            } else {
+                return;
+            }
+
+			
+            //文字切割算法
+            function overflowhiddenTow($texts, str, at) {
+                var throat = pageStrNum;
+                var tempstr = str.substring(0, throat);
+                var len = str.length;
+                $texts.html(tempstr);
+                //取的字节较少,应该增加
+                while ($texts.height() < at && throat < len) {
+                    throat = throat + 2;
+                    tempstr = str.substring(0, throat);
+                    $texts.html(tempstr);
+                }
+                //取的字节较多,应该减少
+                while ($texts.height() > at && throat > 0) {
+                    throat = throat - 2;
+                    tempstr = str.substring(0, throat);
+                    $texts.html(tempstr);
+                }
+
+                return {
+                    curr: str.substring(0, throat),
+                    next: str.substring(throat)
+                }
+
+            }
+
+            $page.turn({
+                width: page_width,
+                height: page_height,
+                elevation: 50,
+                display: 'single',
+                gradients: true,
+                autoCenter: true,
+                when: {
+                    start: function () {
+						Bridge.call_setNowProgress(($page.turn("page")/$page.turn("pages")).toFixed(2)); 
+						},
+                    turning: function (e, page, view) { 
+					
+					},
+                    turned: function (e, page, view) {
+						
+                    },
+					first: function (e, page) { 
+
+					},
+					last: function (e, page) { 
+
+					}
+					
+                }
+            });
+			
+			
+			/*
+				if(readPage!=0){
+					
+					$("#pages").turn("page",3);
+				}
+			$("#pages").bind("last", function(event) {
+	element = $("<div />").html("Loading...");
+    $("#pages").turn("addPage", element);
+});
+*/
+            $wrap.click(function (e) {
+                var e = e || window.event;
+                //获得当前点击位置距离浏览器顶部的距离
+                var top = e.pageY;
+                //获得当前点击位置距离浏览器左侧的距离
+                var left = e.pageX;
+                let windowWidth = $("#magazine").width();
+                let windowHeight = $("#magazine").height();
+                console.log("浏览器宽，高：%s %s", windowWidth, windowHeight)
+                console.log("点击区域,距离左,上：%s %s", left, top)
+                let threePointsWidth_left = windowWidth / 3;
+                //let threePointsHeight_left = windowHeight / 3;
+                let threePointsWidth_right = windowWidth / 3 * 2;
+                //let threePointsHeight_right = windowHeight / 3*2;
+                var pageCount = $page.turn("pages"); //总页数
+                var currentPage = $page.turn("page"); //当前页
+				
+				//var progress = (currentPage/pageCount).toFixed(2);
+				//Bridge.callFromJs_nowProgress(progress);//通知给python
+	
+                if (left <= threePointsWidth_left && left >= 0) {
+                    console.log("左边区域");
+                    previousPage(currentPage);
+
+                } else if (left >= threePointsWidth_right && left <= windowWidth) {
+                    console.log("右边区域");
+                    nextPage(currentPage, pageCount);
+                } else {
+                    console.log("中间区域");
+                }
+
+            })
+			window.toPre = function(){
+				//Bridge.callFromJs_nowProgress(($page.turn("page")/$page.turn("pages")).toFixed(2));//通知给python
+				if ($page.turn("page") > 1) {
+                    $page.turn('page', $page.turn("page") - 1);
+                } else {
+                    console.log("已经是第一页")
+					Bridge.call_refresh_preCatalog("已经是第一页")
+                    showAlert('已经是第一页');
+                }
+			}
+			window.toNext=function(){
+				//Bridge.callFromJs_nowProgress(($page.turn("page")/$page.turn("pages")).toFixed(2));//通知给python
+				if ($page.turn("page") < $page.turn("pages")){
+                    $page.turn('page', $page.turn("page") + 1);
+                } else {
+                    showAlert('已经是最后一页');
+					Bridge.call_refresh_nextCatalog("已经是最后一页")
+                }
+				
+			}
+            function previousPage(currentPage) { //上一页
+			    if (currentPage > 1) {
+                    $page.turn('page', currentPage - 1);
+                } else {
+                    showAlert('已经是第一页');
+					Bridge.call_refresh_preCatalog("已经是第一页")
+                }
+			
+            }
+            function nextPage(currentPage, pageCount) { //下一页
+			 if (currentPage < pageCount){
+                    $page.turn('page', currentPage + 1);
+                } else {
+                    showAlert('已经是最后一页');
+					Bridge.call_refresh_nextCatalog("已经是最后一页")
+                }
+               
+            }
+
+            function showAlert(msg) {
+                clearTimeout(timer);
+                $alert.text(msg);
+                $alert.fadeIn();
+                timer = setTimeout(function () {
+                    $alert.fadeOut();
+                }, 1000)
+            }
+		
+		}
+		
+		//获取python传递的str
+		if(writeStr){
+			initGetPages(writeStr);
+			if(readStatus=="pre"){
+				//$("#pages").turn("disable",false);
+				//$("#pages").turn("page",$("#pages").turn("pages"));
+				//$("#pages").turn("disable",false);
+			}
+			Bridge.call_setNowProgress(($("#pages").turn("page")/$("#pages").turn("pages")).toFixed(2)); //页面加载完毕后通知python
+		}else{
+			alert(writeStr);
+			return;
+		}
+		
+	}
+    </script>
+
+
+	
+
+
+    
+</body>
+</html>
